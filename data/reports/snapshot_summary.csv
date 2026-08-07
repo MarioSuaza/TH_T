@@ -1,0 +1,3 @@
+snapshot_date,run_id,status,input_file,rows_read,rows_valid,rows_rejected,rejection_rate,rows_new,rows_updated,rows_deleted,rows_unchanged,rows_reactivated,updated_rate,rows_current_after,amount_current,duration_seconds
+2024-10-15,20241015__9eb7c1156472,SUCCESS,movimientos_dia_T.parquet,50000,48457,1543,0.03086,48457,0,0,0,0,0.0,48457,1133406868796.56,0.5248022509999828
+2024-10-16,20241016__ee067cc5bee0,SUCCESS,movimientos_dia_T1.parquet,49000,47560,1440,0.029387755102040815,9761,3724,10658,34075,0,0.07830109335576114,47560,1113305841982.36,0.6563705009998557

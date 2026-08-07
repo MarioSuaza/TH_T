@@ -1,0 +1,201 @@
+movement_key,id_cliente,movement_date,product,fund,type,amount,description,commercial_name
+c4dd9617f9830085699af61404781e5252e826c2e88960d6a9469193a165b861,CLI001985,2024-10-12,Fondo de Pensión,Renta Fija,IN,49998466.14,Venta de activo,BTG Pactual
+c4993fbd328d871e5e5be78c920ab7253aa01e7d3d6452bc3a9bf522802bad1c,CLI000035,2024-10-06,Cuenta de Ahorro,Renta Fija,IN,49997536.52,Depósito inicial,Valores Bancolombia
+e3dd399fc520463111659a715ca0b0083333b5df63dddd06ce8ba158cca33874,CLI001781,2024-09-16,ETF,Balanceado,OUT,49994737.2,Ajuste por valoración,
+e3e532c8c457bf14a3c7b5bd6cdf9f527e78cf06afa9225a31994f6d2a27c0ad,CLI000521,2024-10-15,Acciones,Renta Variable,OUT,49994573.98,,BBVA
+fdf7022d45bbdca0204d4c8de4cedee561cc5856e279b63936272c4573beb444,CLI001452,2024-10-07,Acciones,Conservador,OUT,49988008.63,Comisión de administración,
+e01a56e66bcb1710305b7b43174ad1a2f8e44ae7ad7cdff68cdd80699dccf8c3,CLI002084,2024-09-22,CDT,Renta Variable,IN,49986532.97,Redención anticipada,Itaú
+e59cee2df438e9541a307923e9643f10028bcee29ecec7444f38110d97a03c57,CLI000775,2024-10-07,ETF,Internacional,IN,49982501.74,Depósito inicial,
+ae925a4ffd5d8734dc9ad29d929a60d700ccca7d7d6afcf19711b4d7c57b5f40,CLI000415,2024-09-26,Cuenta de Ahorro,Mercado Monetario,OUT,49981419.91,Reinversión automática,Scotiabank
+d9c840e012c2187feb2cac55f9d45ceeb88f069e0ca1f7742a9fa453b0509be9,CLI001135,2024-09-27,Bonos,Balanceado,IN,49980005.28,Venta de activo,
+87f5ae84d63ae37ed3188a8f7f4aa08029482459e3d4c7efe417d5eb0ac968be,CLI002609,2024-09-30,Bonos,Balanceado,IN,49979145.19,Rendimiento del período,Davivienda
+0f705f57e597ad60a4840dd400aad9b314943d19ea0bdb0d669fdcc11dd37852,CLI001707,2024-09-23,Cuenta de Ahorro,Balanceado,IN,49978640.72,Compra de activo,BTG Pactual
+09f6ca5bd177ab94d5f92bac75f1b33c4450af47b6dc6c55b1dbef494de3073e,CLI002126,2024-09-26,Divisas,Conservador,IN,49978218.65,,
+fc329c9846ffd2e07cd8d636fda564d491b6092fc3d7d3d5517ad6cb2eee63c1,CLI000981,2024-10-15,Cuenta de Ahorro,Renta Variable,OUT,49978214.51,Reinversión automática,Fiduciaria Bogotá
+e6f15d5eea91174e5b7107284067f42c5b2f33925ab3dc94d43f833f03ed6f76,CLI002989,2024-10-13,Bonos,Renta Variable,IN,49976984.76,Retiro parcial,Corficolombiana
+d3e9cdbd07cdb40ff8c6c6e0f7f61b385571f3bd98e1137e8aaee94102e6954d,CLI001917,2024-09-15,Acciones,Internacional,IN,49975886.8,Reinversión automática,Skandia
+c0b853e9259482029d2012365ae189789fd55ddb83268611782421b674490e48,CLI000371,2024-09-18,Cuenta de Ahorro,Balanceado,IN,49968602.61,Compra de activo,Skandia
+f8021e1f6c1f5063dc11d1bc22d5e491941b421408aedd01e6344e1abb58fb3a,CLI002950,2024-09-28,Divisas,Renta Fija,IN,49965703.09,,Corficolombiana
+850f8b7f9c8cc30342eb4baea4e873f88e6d74570e7f0f7ace44950cc93339e4,CLI002841,2024-09-24,Acciones,Internacional,IN,49965425.22,Retiro parcial,Scotiabank
+1ba4cf47b491fcc83aee275de945cb25f35ff650791bb65e71428ef1a2fe8113,CLI000802,2024-10-06,Divisas,Balanceado,OUT,49963472.71,Ajuste por valoración,
+4638bdddb26f541f73794252620b048fc57635730426b42e756366571acca136,CLI001693,2024-09-22,Bonos,Renta Fija,IN,49963006.3,Rendimiento del período,Bancolombia
+ccb2076511a2339278f27520f4aa74aa3f77bae268378bdea8fc3ec11ed19924,CLI000087,2024-09-28,Bonos,Conservador,IN,49960434.08,Compra de activo,Scotiabank
+4e72ecf09c04cf41a61fd65fc5b15c56e0d0e5466866bd0f46a51568cc71e161,CLI001377,2024-09-17,Cuenta de Ahorro,Renta Fija,IN,49959444.93,Ajuste por valoración,
+3cb07ba8939e9e24668c6d76e3391ba0c3bc61fcf964b70d7a7f5202e5239299,CLI002377,2024-09-22,Cuenta de Ahorro,Crecimiento,OUT,49959165.94,Retiro parcial,Bancolombia
+41c29e12dab2bc5912716c526cb6e1735314761246ca5bada03d0234073d4e07,CLI001796,2024-10-14,Cuenta de Ahorro,Internacional,OUT,49958953.88,Compra de activo,BBVA
+65423882c08181e888665b44b6aadf548cbe9e64ffa298b6a15a90e304e05563,CLI000930,2024-10-03,Bonos,Mercado Monetario,OUT,49957873.25,Traslado entre fondos,BTG Pactual
+96e57a3767a914db8cd1770bf56cf0b0290a1e0563d3e1f48419abba8a0f7d59,CLI002293,2024-09-29,Divisas,Renta Fija,IN,49956414.22,Retiro parcial,Itaú
+79491ecdaa6c82b9eff91e5e69862034f7cb7200f637bc11ec0735aa85f4b554,CLI000253,2024-10-12,Bonos,Mercado Monetario,OUT,49955704.98,Comisión de administración,Bancolombia
+2811181f952a2d4b6cefdc0c0ce7606bf71546d54781998de5384430f8471aea,CLI002314,2024-09-22,CDT,Crecimiento,OUT,49955068.63,Venta de activo,Scotiabank
+abc9bac64f68f64907105e2ef8b89c727717ab53d964b7f4563d3ff9b48728e5,CLI000292,2024-09-29,CDT,Internacional,OUT,49954219.54,Reinversión automática,BBVA
+7607a16005ebbc2a60f645e4bf3e965201f60cbac67eedb9d66cdd75ee02dada,CLI000134,2024-10-14,Fondo de Inversión,Renta Variable,IN,49952552.84,Reinversión automática,
+9a0a4fe4570bee93fc49d5d891ed10096a6beb7ff631d47c7f4472487e1ad5c9,CLI000945,2024-09-22,Fondo de Pensión,Conservador,OUT,49952512.06,Retiro parcial,Davivienda
+e0440cd268517c45bd44558eca93d68aae14b5e6ad2305fc3c2a006a82c68e7e,CLI001938,2024-09-23,Divisas,Crecimiento,IN,49952082.02,Venta de activo,
+1a3ce3b2ff98d7d8811018ba92857cc11600c20b7c59b45c96defd64009ead4e,CLI002247,2024-09-22,CDT,Internacional,IN,49951602.01,Traslado entre fondos,Fiduciaria Bogotá
+72d18406ce957bcf5122f029a9289898c75bbeb1b00f1bf5f05f798d92185553,CLI000005,2024-09-21,Bonos,Internacional,OUT,49949949.37,Venta de activo,Fiduciaria Bogotá
+8fe7206262bf5bde37ee89c0adfbe65667c35999fdb52d376b301e2d7921d41f,CLI001967,2024-10-13,Bonos,Renta Fija,IN,49948272.26,Comisión de administración,BTG Pactual
+d71320e84ba68f717541597a60a2df76055ef4fa0c961f3e5788dca86d185fa7,CLI000351,2024-10-03,ETF,Internacional,IN,49947869.7,Compra de activo,Valores Bancolombia
+b44b468e03a1742a5cc63ae070d982f2a778a73b055fc0bc3b5c044a47234a48,CLI002590,2024-10-09,ETF,Renta Fija,OUT,49945994.24,Compra de activo,
+c1c17a7708df524761d9921187f2c722b76cded53020bcfd90530dfce04db93a,CLI001721,2024-10-15,Fondo de Pensión,Internacional,IN,49945023.4,Depósito inicial,Fiduciaria Bogotá
+f3b6e075d58b431e1370c22d651699235b148d72a56ede159be557325ccaf472,CLI001698,2024-10-02,Cuenta de Ahorro,Balanceado,OUT,49944889.53,Traslado entre fondos,Davivienda
+0783b0d73d54c5456e4b5e1b99ebc71b42867e4624262a68de5f6e53288d4ff7,CLI000376,2024-09-22,Fondo de Pensión,Crecimiento,OUT,49944870.09,Traslado entre fondos,Scotiabank
+3813c0ccc8ac7e5553dedf610591643f2024ff14407e9db75a7b5435f7604ba5,CLI002683,2024-09-15,Acciones,Balanceado,IN,49944682.78,Rendimiento del período,Corficolombiana
+6a9c0170fb9b69c138c42165b48331347b657b23fbeb9a41ef262a4044e5a83f,CLI002258,2024-09-17,Fondo de Pensión,Conservador,IN,49943851.02,Compra de activo,Scotiabank
+0e40e3e8b7fcdafd298f18c9c39688b9b3ac7319e3d30e4bdd68346a03c9b1df,CLI000342,2024-09-27,Bonos,Crecimiento,OUT,49941066.6,Reinversión automática,BBVA
+1b678938d2147302c4068cff1c33f8687c72d65af25259eb9180720ba2e80b58,CLI000639,2024-10-07,Divisas,Crecimiento,IN,49940850.81,Reinversión automática,Fiduciaria Bogotá
+b201dd4d397afec38153e9482864ee197b198cf25b12dfcc8bfcbea809a4e9b4,CLI000515,2024-09-28,ETF,Conservador,IN,49940552.13,Reinversión automática,BTG Pactual
+af250514830327ce27150afcdbd5acc4dd720880ff777110f3783faff78e2b6c,CLI001658,2024-09-16,Fondo de Inversión,Balanceado,OUT,49938567.8,Compra de activo,Bancolombia
+bc2828d2dde03b801cdf2cf6e637c66ce69d353e0903766569739e631c6f1fdd,CLI002486,2024-10-15,Bonos,Conservador,OUT,49938360.65,Traslado entre fondos,Davivienda
+e537795e0a432566814486f737315a53e087ff0ae46cfbd2a5808c8da7efb654,CLI002634,2024-10-13,ETF,Renta Fija,IN,49938045.57,Compra de activo,Corficolombiana
+c3cacdca1c82d08f71ac94a5a59d9b5b241b3f646c39916fa67eb3336a42e69f,CLI000014,2024-10-15,CDT,Balanceado,IN,49937333.22,,BBVA
+8f9d0949a1c79dd7c294da56f2a63a81cd0e097f06a9d0c31235e35cd6bcd2cd,CLI001867,2024-09-19,Acciones,Mercado Monetario,IN,49936082.19,Compra de activo,
+7afb038c69b10ed29b1e93f883c6149a52ca823357f9176bef34e074583d4439,CLI000474,2024-09-25,Divisas,Mercado Monetario,IN,49934497.23,Compra de activo,
+dc5bac2e1df98ff7a6c166d3dc47944b03a933b467b308678d5f3998ba117769,CLI002292,2024-10-03,CDT,Balanceado,IN,49934379.28,Reinversión automática,Itaú
+e24e4ca5b0eed622a311111292d7a3b7351fb086127b33c02151a67a2bb1b7a4,CLI001607,2024-10-03,Bonos,Renta Variable,OUT,49934102.57,Venta de activo,
+5d64cba43f9fda597c29b1c60f3f507535c3bda1af21692fea6cfbe52a0184b6,CLI002079,2024-10-10,Fondo de Inversión,Mercado Monetario,OUT,49932262.8,Retiro parcial,Bancolombia
+f0752f08bdeff55070997abf7edf18caf7d4b75a68066bc48cd88326859d944f,CLI002917,2024-09-23,ETF,Balanceado,OUT,49926145.6,Retiro parcial,Fiduciaria Bogotá
+475c6c7975de947fb94dfb2c259f4314439c37a67d76af740f2a0a75cb31fbb2,CLI000327,2024-09-24,Fondo de Inversión,Renta Variable,IN,49925899.13,Ajuste por valoración,BBVA
+d6fc18eb27afc20aa878ce967b607ccca08b941d8c6c419535be807a15f71033,CLI001253,2024-10-13,Cuenta de Ahorro,Balanceado,IN,49923800.68,Redención anticipada,Scotiabank
+99ebe212fe2408bbd7eeabeccbab9f53522561f8246d3966024ac285009f9c99,CLI000354,2024-09-20,Bonos,Conservador,IN,49923625.23,,Scotiabank
+4d87cfccb2c4e53d1c28539a9f97ee5be527517de7628b5384d24c393bab4c10,CLI001867,2024-09-22,CDT,Balanceado,OUT,49923550.62,Depósito inicial,Bancolombia
+eff0c60b7995e8ce0e5cd53285118c3ad90e104a5e37c147c2b0dbecece86ba7,CLI000799,2024-10-08,Bonos,Renta Fija,IN,49923169.54,,Bancolombia
+961a905a44d505cfba74afb62be8aea987417dbaf4d4fa02ac61761b5ff39b33,CLI001614,2024-09-30,Cuenta de Ahorro,Balanceado,OUT,49922967.23,Comisión de administración,Scotiabank
+ce99b6edc8ba23ceb90e38c2d2d267b2e39701b16aa36eb93264b6ad9b8fc77e,CLI002574,2024-09-28,ETF,Crecimiento,IN,49922939.12,Compra de activo,Corficolombiana
+350c284556a0f7472cb36a05ba6282553e708febf4eb91786174f63682427742,CLI001750,2024-10-13,Acciones,Crecimiento,OUT,49921680.17,Rendimiento del período,Fiduciaria Bogotá
+3cf51d5a73efa05ba4ebde00eb3521aca2b53061b1be3d757015955d3380ab6c,CLI000410,2024-09-21,Cuenta de Ahorro,Balanceado,OUT,49919271.37,Venta de activo,BBVA
+2545f2f11373c74e6f5712edd03a789592b4209bd0077304b8f4db7aed4ec76c,CLI002075,2024-10-03,Fondo de Pensión,Balanceado,IN,49918437.83,Comisión de administración,
+fc3341d8aedde651e23f524cd3d28559a961c642303845fb919d965c9d1518bd,CLI000219,2024-09-18,Bonos,Renta Variable,IN,49916769.21,Retiro parcial,Davivienda
+73752b56fafc9ca57e35cc99dd8bf04f0faf1ad4b8967a0670d326e8c225a6d2,CLI000084,2024-09-19,CDT,Conservador,OUT,49916758.51,Redención anticipada,Skandia
+f830f269c4ccc746af02aeacf09268e31dcc29086ea5786d2f14a05980d1038c,CLI001099,2024-09-15,CDT,Renta Variable,OUT,49915759.93,Depósito inicial,Valores Bancolombia
+0393e6984d62851bc1e674d04c58b10759edd5701df5b8d68ff2c66958e8f4c4,CLI000076,2024-09-30,CDT,Internacional,OUT,49915620.67,Traslado entre fondos,Corficolombiana
+b9cd0d15ef8c812943798d4ac27b981dd06cf2a60fd2d77a28b128eea39c40b0,CLI000780,2024-10-16,ETF,Renta Variable,IN,49914213.05,Ajuste por valoración,
+22e24fa6b5e55196b1e57570b327ea871390ab6906734916bf27195f055f8e2f,CLI001599,2024-10-03,Cuenta de Ahorro,Balanceado,IN,49913860.62,Compra de activo,
+c3f57aa9ee9e41d902c8a67802b60453bda3f814efb6cd28f88ee510059c6750,CLI001868,2024-10-10,Cuenta de Ahorro,Mercado Monetario,OUT,49912888.44,Redención anticipada,Skandia
+4dc657f935dd5d7029cdd1d20b9efdfa074c596836bace5b102d34955fdb9cd0,CLI000842,2024-09-20,Acciones,Crecimiento,OUT,49912529.59,Comisión de administración,Scotiabank
+3db49dd8d803e2c88f7d4a2515f44edbf69ca6a4be3b879081a8203ae2d4d3ed,CLI001296,2024-09-26,CDT,Renta Fija,OUT,49910247.19,Venta de activo,
+5584c9d01ebcc179e232a9d40b6e343abaf3b5937e227bf260baf249b6859cc4,CLI001613,2024-10-06,Fondo de Pensión,Conservador,IN,49909026.74,Comisión de administración,Skandia
+62b7bc6846a756aa8cbd5e78108abb4d8aa40a260453058240d5d94bb9e83331,CLI000921,2024-09-16,Fondo de Pensión,Renta Variable,OUT,49908725.76,Rendimiento del período,Davivienda
+679c439490bdf3103a40e78ecc08865e3e484347b683d62c5e302e8cf374b126,CLI002143,2024-10-15,CDT,Mercado Monetario,OUT,49908658.58,Compra de activo,Davivienda
+22ebeca330adf4259c2d00f42445d30dcbc246d872a9552ce4549f110929a10b,CLI001976,2024-10-14,ETF,Internacional,OUT,49907634.54,Retiro parcial,BBVA
+4dae49918ad45a56bb17a1ed07a7ae22997e470fe637f80a7c1a8b5ec9fd4a3a,CLI000869,2024-09-24,Fondo de Inversión,Mercado Monetario,IN,49905855.26,Traslado entre fondos,Scotiabank
+3f616dc1c5638d1c46f1315167809a4d6eac28fdf06ce99deeb6248b619a9e00,CLI002203,2024-10-15,ETF,Renta Fija,IN,-49905610.23,Traslado entre fondos,BTG Pactual
+a5c7998ab2abfa7d192613afc9f6160978ea69a5a56183b2a5048a2948259e45,CLI001487,2024-10-15,Acciones,Balanceado,OUT,49904933.7,Traslado entre fondos,
+997d1de35ba412764dfb8f77b0aed158f3d481cddceb5061ab45b61a468b1bbb,CLI001688,2024-09-25,Cuenta de Ahorro,Internacional,OUT,49903408.63,Retiro parcial,
+7dc135f8a26ba508d6e70b7a19abc0e459d71c0fc1c7937ccc8a40c53a3fe553,CLI001704,2024-10-02,Divisas,Internacional,OUT,49903317.12,Comisión de administración,
+3ab5b8da806b2d4a4b490201092aec9a80e78498ed7b358023a8c5620045f1c7,CLI000581,2024-10-13,CDT,Conservador,OUT,49902520.15,Traslado entre fondos,Davivienda
+7b4822fa044c8c9fc949058ea4f386c207774117108c1a261fc609b115894222,CLI002230,2024-10-15,Divisas,Crecimiento,IN,49902193.14,Traslado entre fondos,Bancolombia
+0c9b53168600e4ae1c0f23723be51fb2b5f03706e72e73110e6b1f66a395307d,CLI001510,2024-09-28,Cuenta de Ahorro,Mercado Monetario,OUT,49901978.9,Traslado entre fondos,Scotiabank
+7c002c4155b3b1d69340d6abc934dda3cc467068ec8df2e86b42d2620b25af65,CLI000499,2024-10-11,ETF,Renta Variable,OUT,49899131.36,,Corficolombiana
+677bd6f85b630d4fde87b180821ab4b14d747468b1481fdc393c52ba105e1243,CLI002066,2024-10-14,Acciones,Conservador,IN,49898226.84,Venta de activo,Davivienda
+7acd61f9b7f2c9c62a0b08599dbc95dc7892d71b07a090efa53c5d78add82013,CLI001042,2024-09-19,Fondo de Inversión,Conservador,OUT,49897783.04,Ajuste por valoración,
+1c16dab067a1cdd9e2f0a4b4bb05814ddbfe59565eaa2379716fd29bf503b966,CLI001619,2024-09-26,Fondo de Inversión,Crecimiento,IN,49896784.92,Rendimiento del período,Skandia
+579766ac07efd9fb8db6759776996d660d905bcfbc92e511e22c6ddeeb360e2f,CLI001855,2024-10-10,Fondo de Inversión,Renta Fija,IN,49896230.47,Reinversión automática,Fiduciaria Bogotá
+47a7a69ee719180c7df731804e18ef420dfd8a4c019f584a236631e627522588,CLI002057,2024-09-26,Fondo de Pensión,Mercado Monetario,IN,49895413.49,Compra de activo,Corficolombiana
+fa84e56a226b00d0063175eac56713c5d0b5dd493d77008f7c654fccad75a189,CLI001145,2024-10-14,Fondo de Inversión,Mercado Monetario,IN,-49895180.91,Ajuste por valoración,Scotiabank
+b760543198ce0f79fb1ccd66add14f0f488d71394e7386e576f0c6ee47bf1952,CLI002331,2024-09-27,Fondo de Inversión,Renta Variable,IN,49894715.32,Redención anticipada,Skandia
+c3ffa49e92e7397408ab09d6da928dc106b905abaa0686e1f5331530f7ebfe52,CLI000317,2024-10-15,CDT,Crecimiento,OUT,49894339.1,Reinversión automática,Valores Bancolombia
+21ca5a1cc1d2d02a1dd14cdf5902ee9d9de54994536ce3787058cdc3c1c10e39,CLI000108,2024-10-05,Acciones,Mercado Monetario,IN,49894098.63,Reinversión automática,
+7a9a586b49c40170d9cb4fdcc61fcbb0ed20e76c3543899e9ebdb9325270848f,CLI000528,2024-10-05,Cuenta de Ahorro,Renta Variable,OUT,49893537.46,Rendimiento del período,BBVA
+9defa2d95e71926fc4a72ef7f2a7c079b090a89e13aa039f1a131e164409f8a4,CLI002366,2024-09-26,Fondo de Pensión,Balanceado,OUT,49891361.03,Compra de activo,BBVA
+65926d5a3cd7fd3718f9022e80725551a7d1af5cb9a6cae277836c9a86fbf011,CLI000076,2024-10-13,Fondo de Inversión,Internacional,IN,49890422.69,Compra de activo,Scotiabank
+0edd20678000f40183d9f5c90bee2f4a5d566ff846bbcf6cdc76fe6b04cf5e08,CLI001697,2024-09-30,Fondo de Pensión,Renta Fija,IN,49889928.25,Comisión de administración,Skandia
+23e8f509c0da04deb875352c7fc49e3dc5e0e3fe93d0ae7de568865262ccc8ec,CLI000897,2024-09-22,Bonos,Renta Fija,OUT,49889309.76,Traslado entre fondos,Fiduciaria Bogotá
+ca8f8cd2982504cceceaa0b60c6d14d5d8323a9eac458e658c3b08f01776c02e,CLI002232,2024-10-07,Fondo de Pensión,Crecimiento,IN,49888944.0,Ajuste por valoración,
+39dc0d9c7351d0bfb91250ccd6dd961b9f71d8a661787ddad48b0a5ea76861f6,CLI000707,2024-10-11,Cuenta de Ahorro,Internacional,IN,49888905.52,Retiro parcial,Corficolombiana
+eb435b89626ffd90353b159b45ebf6178758c9cfe5c2e01f08ffde04e9e53788,CLI001952,2024-09-28,Fondo de Inversión,Mercado Monetario,IN,49885038.6,Comisión de administración,BTG Pactual
+29c08f8ede85b108ff9a47bd03e853c66a649b9911fa9d10917ce5597beabdce,CLI002423,2024-10-16,Acciones,Crecimiento,OUT,49883440.84,Redención anticipada,BTG Pactual
+1de8d0b9aa0af5a4ae5800352cf56eb382f7216b748a6703aa752c6efdcd3625,CLI001936,2024-10-09,Divisas,Internacional,IN,49880532.76,Ajuste por valoración,BTG Pactual
+17e69513dbd68b3724ebb4e7cfa0d9bc208ec4cc1aa7d962688717ce4c415f4d,CLI000966,2024-10-13,ETF,Conservador,OUT,49880288.2,Redención anticipada,
+234c2d4209da730df849510b707412e7e3cb226de6dd7154b4de18e92d03544e,CLI002028,2024-09-23,Acciones,Conservador,OUT,49879405.6,Rendimiento del período,Bancolombia
+2900d36db777e87d72bd6f7c2f2ebe655b75bdcc2e965b641bef089ad4e2db0e,CLI001615,2024-09-28,Bonos,Internacional,OUT,49878353.81,Retiro parcial,Corficolombiana
+4abfbb70457c37a1a02413ab7b37b394d18a07bfa3d07960aa7113346b26195b,CLI002858,2024-10-05,Fondo de Pensión,Renta Variable,OUT,49875547.66,Ajuste por valoración,Davivienda
+1acf2193399f40d77d8a7aa5f457204541a4ccc6f2678e07d440900315aec796,CLI001200,2024-09-29,Bonos,Renta Fija,OUT,49872554.09,Traslado entre fondos,BBVA
+6038be741bcdd03646a9e2c0985f38c6f396d04ac8197dfabc62255cebb6e69c,CLI000570,2024-09-21,Bonos,Balanceado,IN,49871877.83,Retiro parcial,Skandia
+aeecd1f9494878f92c2fdd69e924d8d4aca4bf51cdb477ec0ba0e3077eec74eb,CLI000205,2024-09-27,Acciones,Internacional,IN,49870428.2,Ajuste por valoración,BBVA
+94c1c1ce3fefa3c57e245008e5adf98e7e27f33dec205ae0b7ce51a51c42fdfa,CLI001516,2024-09-29,Fondo de Inversión,Mercado Monetario,IN,49870119.88,Rendimiento del período,Bancolombia
+ecdc1c8970b7169d991297b8c4bcbb3d2ebb99428a9f936b8522eb26d157ef9c,CLI002518,2024-09-19,ETF,Conservador,IN,49868217.29,Retiro parcial,Bancolombia
+fbaee817e520b337f07b5572db5d2d6985615e9bb25a2303862f3551999a99b7,CLI001192,2024-10-10,ETF,Mercado Monetario,IN,49867951.59,Venta de activo,BBVA
+a339fc0479f3f65c5bcd5f3a5564e06e00b4f7d8fcbcd2102046d9b83d7a1995,CLI002926,2024-10-03,Bonos,Conservador,IN,49867391.3,Traslado entre fondos,Davivienda
+17662f35f2fdaeb1a150dee282e1afe76c80cee14f079cfc421d563fbd36bf88,CLI000348,2024-10-14,CDT,Conservador,IN,49866030.55,Compra de activo,
+07fdab3d5211e99cd200b4c961c6feb23b2967c497be48c36d42c9831c48fd31,CLI002989,2024-09-17,CDT,Conservador,IN,49864029.12,Compra de activo,
+7e2801afdd736a34238740d168789be942a94a616fd0d5e780b3d573f206a879,CLI001083,2024-10-03,Bonos,Renta Fija,OUT,49863148.16,Traslado entre fondos,
+35a967c01d64e21ff1beda3b6eeaa7561cb235199370e701147e87f56c65c212,CLI002142,2024-10-14,Divisas,Internacional,OUT,49862794.56,Venta de activo,Scotiabank
+ff8fe2fb10bdfa6dc6ad4ab02a4d2ad679f9d29d3a4c5f05313cf9882162123b,CLI002962,2024-10-12,Acciones,Internacional,OUT,49858592.98,Comisión de administración,Valores Bancolombia
+a4589f8a87138ed31c7c3d501b7b6ad08ca780d43ba96fe984f927aa47d2c768,CLI001243,2024-10-07,Divisas,Mercado Monetario,IN,49858079.04,Reinversión automática,
+308a28ac2c7febd6c184b2c05361f1bf20c5a47d80126b3c426aa782226a4b72,CLI002770,2024-09-30,Divisas,Crecimiento,OUT,49856746.37,Retiro parcial,
+2a5d68a56e045b03de56dc3b39973b45f919f52eb26cdf5253f938b21c450567,CLI001636,2024-10-11,Acciones,Renta Variable,IN,49856348.88,Depósito inicial,BBVA
+8ebbc7317fb23aaa3f1686b7ddf0709ba2a2db3d5257356399d3acd63bb6f39e,CLI002080,2024-10-09,Divisas,Renta Fija,IN,49856131.89,Rendimiento del período,Valores Bancolombia
+2449e5b20b27974e762cf8b12c64d7971c723a28bf71f3123412c81949645a14,CLI001262,2024-10-06,Divisas,Renta Fija,OUT,49854291.75,Comisión de administración,Scotiabank
+9d214406328fe54b3bad13f7e081319d5e8db7a73789991bbcb1b47714b7eda4,CLI002027,2024-09-28,Bonos,Balanceado,OUT,49852062.41,Depósito inicial,Itaú
+42f837b3a3cebec201e649474b13ad579bda6d708d1e7d92774116e9627e8f1b,CLI001001,2024-09-23,Fondo de Inversión,Balanceado,OUT,49851507.25,Redención anticipada,
+6c8b3c3579e825a2e25120244f5bcddd9defa5ab3e9eb8d704afc7e710697a8a,CLI002564,2024-10-06,Bonos,Internacional,OUT,49851309.18,Ajuste por valoración,Itaú
+acf000766ed0d8d7f3960f6d2d9a49279f6eefedce0cd44553cdfcaefad8fb72,CLI002490,2024-09-15,Divisas,Crecimiento,IN,49850796.65,Rendimiento del período,Skandia
+df8fa822ff7e909e2756fa8e9daadccb27c4e5fcff43c1e41a52b4b4e7b331b5,CLI000268,2024-10-10,Acciones,Renta Fija,IN,49850651.12,Venta de activo,Valores Bancolombia
+747cf8389e1eec106e0a7ef561650920f06e05afe858212615a9333d4a84fa43,CLI001772,2024-10-12,CDT,Renta Fija,IN,49848567.56,Traslado entre fondos,Valores Bancolombia
+74e47a3065f3807b0588a7b73956c7d08c5d66a1fe106af746d811e75820fe45,CLI000001,2024-10-11,CDT,Renta Fija,OUT,49848360.7,Rendimiento del período,BTG Pactual
+d24133367530fb5b41124675ef0b1aa56b7e474b55db7aac4391e70c4d3f9cd3,CLI002153,2024-09-15,Fondo de Inversión,Internacional,OUT,49846267.96,Traslado entre fondos,Corficolombiana
+f5d2f1845d6a2cbf0284450e5aaba6d7a560a9211521be5c632f3c962e62b0d0,CLI000989,2024-09-20,Acciones,Renta Variable,IN,49845422.65,Redención anticipada,Itaú
+3ec5b946d7ac1afec0a3c4b8fdb4a5c5358cc5be99cb6a4348aba23ccce5578e,CLI000147,2024-09-30,Fondo de Inversión,Renta Fija,IN,49845103.77,Compra de activo,
+c54f80c2b6e2482baf1442a8e7f61285bbf69d5e20eca265b379b4adc1b3ec92,CLI002537,2024-10-06,CDT,Renta Fija,IN,49844720.48,Depósito inicial,Davivienda
+c2951853b90c1809a2979023ba419e8abd6852da5d3e9d1cc501fa0cef8f5157,CLI001757,2024-10-11,Divisas,Renta Variable,IN,49843678.68,Depósito inicial,
+2623dffa2e925e57b48bc188a7d0fe59f91e78b812105fa5ce491fc07b9aa336,CLI002285,2024-09-26,CDT,Crecimiento,OUT,49843147.18,Traslado entre fondos,Corficolombiana
+e6912e4abc4e84987ca8b15a1113c31923e6237f0d60ed32873a152cf203ba12,CLI002747,2024-09-30,ETF,Internacional,IN,49843128.22,Redención anticipada,Fiduciaria Bogotá
+ce67ccac6a1d441aceb0d3e7c1511c42c97054dde2d98cadca9cc9d6d54e4c22,CLI002932,2024-09-24,Fondo de Pensión,Crecimiento,OUT,49841726.68,Rendimiento del período,BBVA
+5ab89030ae886ef4ead626bd99b4f3de9866f3b3d0380e7c22b6ea4165d29f06,CLI002056,2024-09-16,CDT,Crecimiento,IN,49841168.46,Comisión de administración,Skandia
+c541d7487992751e3247e7e43c76f882941650b7d3d718bfb1b7845ed1c33117,CLI000969,2024-10-03,Cuenta de Ahorro,Renta Fija,IN,49840823.73,Venta de activo,Bancolombia
+2df608b2bccbdf210ac0f378ae215431bb35d031c1176b9ea207621ccc6bd1e0,CLI001516,2024-10-09,Divisas,Conservador,IN,49840627.91,Traslado entre fondos,Corficolombiana
+89469c39666b4523538605c3bd266df83f6ac211dd20e225e26a3eb1fc2dc6e3,CLI000228,2024-10-14,ETF,Mercado Monetario,IN,-49840513.75,Venta de activo,Skandia
+78d0346d4e8ff521508d1ba1f4570e29f08f5d572fd80a9bc462377cd2210cc9,CLI001300,2024-10-05,Cuenta de Ahorro,Renta Fija,IN,49840164.13,Redención anticipada,Corficolombiana
+e766e4907ce0edd9886c1175a0cb773bbacfec0ff4680fa840537a142507f18a,CLI000798,2024-10-04,CDT,Renta Variable,IN,49838897.49,Comisión de administración,Davivienda
+5bb3ede89e2c6b33efecb2d7979bef008ce9d7027073dccbbbe79184b60787d7,CLI002770,2024-10-08,Bonos,Internacional,OUT,49837125.08,Reinversión automática,BTG Pactual
+48628d7e594656220168ca15181769a4a108a497998dd9e6d2b21efbd1776416,CLI002427,2024-09-17,Fondo de Inversión,Renta Fija,OUT,49837062.25,Reinversión automática,Valores Bancolombia
+3b40210bcb7b1facd687215aaf45612a9ac90183d2c0d522e43c98f38388244a,CLI000347,2024-10-06,Acciones,Balanceado,IN,49835566.87,Ajuste por valoración,Scotiabank
+ab5003f5f4878c2edd05dfbaf7c0598cfecc12bc6061b64ed655fd779517af8c,CLI000091,2024-09-24,Fondo de Inversión,Crecimiento,OUT,49835520.81,Comisión de administración,BTG Pactual
+3a8e6a2e5ac13f1713ba00af498b79f91c2141d0d562e1f24195ecea112dca17,CLI001373,2024-10-15,Fondo de Pensión,Crecimiento,OUT,49834038.95,Rendimiento del período,Davivienda
+e378e28cd629aa165bbeb8fbede72d3a1b2cafebaef629da9d9e80e61fc5cc2c,CLI002054,2024-10-05,Cuenta de Ahorro,Mercado Monetario,IN,49833603.6,Redención anticipada,Skandia
+a33d77fe01543dc364700e3b5fc7a02a9b6672d4862766fa8690d3dda2d41154,CLI000251,2024-10-06,Cuenta de Ahorro,Internacional,IN,49831690.99,Compra de activo,Skandia
+e5a81ff6575c0475840076f66b433e24447559c9dd28856e3911eae614e65162,CLI001489,2024-10-07,ETF,Renta Variable,OUT,49830451.17,Venta de activo,Scotiabank
+a513ac53e1c595bc9245361838636317de08fa35647477b32dbac8ce0cb09f12,CLI000690,2024-09-19,ETF,Mercado Monetario,OUT,49829477.46,Comisión de administración,Fiduciaria Bogotá
+f2549b10fda835e2fe8039e6f268378cd79b720ec3c9a1ec5e9e6bd4055d4743,CLI001886,2024-10-04,Divisas,Conservador,IN,49829397.09,Compra de activo,Bancolombia
+72db0e1889aee4e7ca291d83eba1bf0f1925ae9dab0eceb541d1259657f2cda1,CLI001762,2024-09-30,Fondo de Inversión,Internacional,IN,49828027.77,Traslado entre fondos,Davivienda
+0daf61bd89457119264bcfc503ed5e41b4f43f7b52ea67ab9103cac4d562a046,CLI002758,2024-09-24,ETF,Conservador,IN,49826149.44,Rendimiento del período,BBVA
+37dae9557cee97636c44070472b1bb005b6567124d32de473f39cfa501985005,CLI002741,2024-09-20,Bonos,Renta Fija,OUT,49825382.28,Venta de activo,Corficolombiana
+66c359361fffe1c1b83d30507d3b354c71e1300fc0530395569e80bfb31e8635,CLI002623,2024-10-05,Bonos,Internacional,IN,49824955.07,Redención anticipada,Scotiabank
+1529a99217bedad5b75a67f9ad003cb6186a9f32ea77815af1b41357579f40df,CLI002426,2024-09-18,Acciones,Conservador,IN,49820590.3,Ajuste por valoración,Itaú
+87adcfaf6e1720df6b0512692a0b20188db3dbb0488e795597b0205274992f11,CLI001611,2024-10-09,Divisas,Internacional,OUT,49818553.82,Redención anticipada,Davivienda
+6a37ba2bd731f42c0b437f07af48e5666af4a0804a64edd6e7ea821c1339ced9,CLI000537,2024-09-23,CDT,Internacional,OUT,49816693.37,Reinversión automática,Scotiabank
+8b5087019cb583da5f30d9a0fd9a91f3d679d70032344421c4340a83ef460941,CLI002986,2024-09-18,CDT,Balanceado,OUT,49816031.44,Traslado entre fondos,Scotiabank
+f323122896cc087d54410cd2e131a872798c24198a64be9d449911b810680d50,CLI002182,2024-09-22,Fondo de Pensión,Renta Variable,IN,49815392.2,Redención anticipada,Fiduciaria Bogotá
+5fdd728ff6401282ac22d62cd948e3229d35cb7e46701d11c1cfbf280d316e10,CLI001216,2024-10-02,Acciones,Mercado Monetario,IN,49811521.32,Retiro parcial,Scotiabank
+224578022a36560fe320921e096cd427e83fc0ad48eb0a5a25fea4727a7a3008,CLI001035,2024-10-12,Cuenta de Ahorro,Renta Fija,IN,49809368.42,Compra de activo,Bancolombia
+953ae38cd0ceaa175bec7339c43b01d90ffa886100efe765872f4cccc028653a,CLI003000,2024-10-15,Cuenta de Ahorro,Conservador,IN,49809332.79,Compra de activo,BBVA
+dcc7171eaaebf21452815a7bf62e75e8057fd3fd82c1c0aca89a191e244f4fe9,CLI001386,2024-10-16,Cuenta de Ahorro,Renta Fija,OUT,49809034.13,Redención anticipada,Corficolombiana
+aa20c2a532865fd829d57e66cf95903b5dac764cc101dffe3e93ecc5fa3f0843,CLI000011,2024-10-01,Cuenta de Ahorro,Mercado Monetario,IN,49808848.79,Retiro parcial,BBVA
+340affdc70dd65ade68586fa96e0a907c78035c8d7ead80d57e2d8ab753924e4,CLI000828,2024-10-04,Cuenta de Ahorro,Crecimiento,OUT,49804011.87,Reinversión automática,Bancolombia
+855c7a792e5f88e045f3abe18b93a108557d01508a2b46edaad53f226a91b5f7,CLI000255,2024-09-27,Acciones,Crecimiento,OUT,49803264.17,Retiro parcial,Bancolombia
+d34f07eaa271448701b4de0b0abef0036c363e29020198f114ee1e9e9005c043,CLI002278,2024-10-04,CDT,Renta Variable,OUT,49801529.14,Ajuste por valoración,
+d000e033c487eaa729aea89d48f27913e1ba39870a21bd07b14d56b21ce45d29,CLI001217,2024-10-11,CDT,Renta Fija,IN,49800928.25,Traslado entre fondos,Itaú
+f41be2da89c5d90e9f4dc2b6937728658573846b38946dead490bc1b70e0185d,CLI000292,2024-10-09,ETF,Internacional,IN,49800638.41,Redención anticipada,Itaú
+81bc5bf13249ac1e4c5838b2db8a6518c33337174f10b3122f5cafb30b76054e,CLI001932,2024-09-24,ETF,Renta Fija,OUT,49800616.96,Redención anticipada,Fiduciaria Bogotá
+db20401c3809578fc817960f8b02f31da8264551e4b66ad5b4719993c37ef114,CLI000046,2024-10-12,ETF,Crecimiento,OUT,49799988.25,Ajuste por valoración,Davivienda
+85dfe6c9763d897708b36ec10dc13eda6a4cd2f05d8b1fa0f7a010ca19a13ad6,CLI002007,2024-09-27,CDT,Mercado Monetario,OUT,49799724.57,Ajuste por valoración,Scotiabank
+9e4abbed1e06861324410a6e71c0714ab6e351a401f2e5a89aa0ec107c2b41e6,CLI001271,2024-09-20,Cuenta de Ahorro,Renta Fija,OUT,49797847.91,Retiro parcial,
+85e79813486040d335498a5394b60bf231e7857f3c624c2598125889ca40ece6,CLI001044,2024-10-12,Fondo de Pensión,Renta Variable,IN,49797023.64,Traslado entre fondos,
+dedad1b97f5f629f84136483ddb667f7efee4771bcedc6e0f7db902c1b6a1afd,CLI001175,2024-09-20,Cuenta de Ahorro,Crecimiento,OUT,49794453.52,Traslado entre fondos,BTG Pactual
+f653d034ca21eecfddd374cbe6f433c21bc15a97d8c4cdbddad20ea081e64917,CLI000294,2024-09-19,Bonos,Renta Variable,OUT,49792696.65,Rendimiento del período,BBVA
+e5bff8962dc5b017f171f9fd3bc6f8dac2bdaba7e2e2f9b2582dd67198f69c5b,CLI001002,2024-10-08,Fondo de Pensión,Mercado Monetario,IN,49786920.36,Redención anticipada,Bancolombia
+3b10abeb44c79b46421b1012e2c198959227adbaedf45b6ec6d7a9c0d32c26c8,CLI001574,2024-09-18,Fondo de Pensión,Internacional,IN,49784946.36,Retiro parcial,Valores Bancolombia
+b5cce874f375a15334f92c5dcb28f1b85083d9c49f1f6f893bbbba41fddbc5df,CLI001269,2024-09-28,Acciones,Internacional,OUT,49784491.71,Comisión de administración,
+b081a068b58cde8c35991cfb32c37267c5a1a83229ae828e369db384a228b962,CLI001823,2024-09-30,Fondo de Inversión,Balanceado,OUT,49783983.62,Comisión de administración,Bancolombia
+0b4c196427511fe01be78488dd41096754069a8b43dc1a50d1f2885777f7ffb1,CLI002249,2024-09-22,Fondo de Pensión,Mercado Monetario,IN,49783962.71,Rendimiento del período,
+2f2e75b45136b5aaa0e0032c525bdfc2547dd0be49fe3c7e440e033e7318173e,CLI001400,2024-10-04,Divisas,Renta Variable,OUT,49778353.52,Venta de activo,Fiduciaria Bogotá
+7377eab97de4b586c5475872bbff7cf7b2b23ccbf8410d73abbeb464142cd5ab,CLI001019,2024-10-03,Fondo de Pensión,Crecimiento,IN,49777552.93,Redención anticipada,BTG Pactual
+ce678f815b29bf44e2f294fc0f413d5649c5ea51672cfdc11dce8a2a4bf06afe,CLI001279,2024-09-26,Fondo de Inversión,Crecimiento,IN,49777231.02,Venta de activo,Fiduciaria Bogotá
+9aeb540c678c797aa26eab8e294f765bed78745c33e047b4f019b2b003aa05ba,CLI001541,2024-10-02,Fondo de Inversión,Conservador,IN,49775924.93,Retiro parcial,BTG Pactual
+96f657b70901fd5c52979f93f7ed584ba9d7c233b421e9eca45623751aea1a94,CLI000090,2024-09-25,ETF,Renta Fija,IN,49775772.41,Comisión de administración,Itaú
+260c942c1cabf0a2b502fbc23acb1f0ee71e7ccb8e66c5907b1742ff7bb8417b,CLI001435,2024-10-07,CDT,Balanceado,IN,49775124.42,Reinversión automática,Valores Bancolombia
+5ffff1aff777afb1864ae974214ede488402946a92ea637caa2bcb2bc60c9dfd,CLI002455,2024-09-30,Fondo de Pensión,Conservador,IN,49774922.66,Comisión de administración,Scotiabank
+7a779597d86a19ebd11ebaf587615d05cdef4613bfbbf28040001d6481dbda1b,CLI001085,2024-09-25,Bonos,Crecimiento,IN,49774372.57,Venta de activo,Itaú
+1603f88526318a6ba643d59f21a24a8a54de8a2cea1af842e09dc1e09ca6be07,CLI001308,2024-10-03,Divisas,Internacional,OUT,49773504.23,Compra de activo,Scotiabank
+a1f841f8b3e7d5211fc697d49f5b09bed0c250e4045ae2d889e9ebfa01b49e5e,CLI001211,2024-10-14,Divisas,Renta Fija,IN,49771815.37,Traslado entre fondos,Valores Bancolombia
+3fd7cecc7d7bace8147dedc66a64d94feb0bbde2453a5783971cc34451fd689f,CLI001490,2024-09-18,Fondo de Inversión,Renta Fija,IN,49768905.83,Rendimiento del período,Bancolombia

@@ -1,0 +1,349 @@
+# =============================================================================
+# CONTRATO DE DATOS - Pipeline de Movimientos Financieros (Tyba)
+# =============================================================================
+# Inventario declarativo de reglas, dominios y decisiones de calidad. No es un
+# motor generico: sql/staging.sql implementa las reglas y las pruebas ejercitan
+# su comportamiento; cada run persiste la version y el hash de este archivo.
+#
+# IMPORTANTE - discrepancia entre el glosario del enunciado y los archivos reales
+# -----------------------------------------------------------------------------
+# El glosario del enunciado documenta una columna `id` ("Identificador de la
+# transaccion"). Los archivos .parquet entregados NO tienen esa columna: tienen
+# `id_cliente`, con 3.000 valores distintos sobre 50.000 filas (~16,7 filas por
+# valor). Por evidencia directa sobre los datos, `id_cliente` es un
+# identificador de CLIENTE, no de transaccion.
+# Ver docs/analysis_and_assumptions.md, seccion "A-01".
+# =============================================================================
+
+contract_version: "1.0.0"
+dataset: movimientos_diarios
+
+# -----------------------------------------------------------------------------
+# Esquema esperado. El orden NO es significativo (se valida por nombre).
+# -----------------------------------------------------------------------------
+columns:
+
+  - name: id_cliente
+    description: "Identificador del cliente. Observado siempre con patron CLI###### (6 digitos)."
+    physical_type: VARCHAR
+    logical_type: string
+    required: true            # la columna debe existir en el archivo
+    nullable: false           # el valor no puede ser nulo
+    role: key                 # participa en la clave de negocio del movimiento
+    normalization:
+      - trim                  # solo espacios externos; no altera el contenido
+    rules:
+      - id: NULL_ID
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "id_cliente nulo"
+      - id: EMPTY_ID
+        check: not_empty_after_trim
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "id_cliente vacio tras recortar espacios"
+      - id: INVALID_ID_FORMAT
+        check: regex
+        pattern: '^CLI[0-9]{6}$'
+        severity: WARNING     # se registra, NO se rechaza: el patron es observado, no normativo
+        action: flag
+        message: "id_cliente no cumple el patron observado CLI######"
+    example_valid: "CLI001004"
+    example_invalid: "   "
+
+  - name: date
+    description: "Fecha del movimiento. Llega en DOS formatos distintos en el mismo archivo."
+    physical_type: VARCHAR
+    logical_type: date
+    required: true
+    nullable: false
+    role: key
+    normalization:
+      - trim
+      - parse_date            # ver accepted_date_formats en pipeline.yml
+    rules:
+      - id: NULL_DATE
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "date nula"
+      - id: INVALID_DATE
+        check: parseable_date
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "date no parseable con ninguno de los formatos aceptados"
+      - id: DATE_OUT_OF_RANGE
+        check: range
+        min: "2000-01-01"
+        max_expr: "snapshot_date + INTERVAL 1 DAY"
+        severity: WARNING     # una fecha futura respecto al corte es sospechosa, no invalida
+        action: flag
+        message: "date fuera del rango plausible"
+    example_valid: "2024-09-22 | 22/09/2024"
+    example_invalid: "2024-13-45"
+
+  - name: product
+    description: "Producto asociado al movimiento."
+    physical_type: VARCHAR
+    logical_type: string
+    required: true
+    nullable: false
+    role: key
+    normalization:
+      - trim
+      - collapse_whitespace
+    domain:
+      # Catalogo OBSERVADO en los archivos entregados (8 valores, sin variantes sucias).
+      # Se transcribe EXACTAMENTE como aparece en los datos, tildes incluidas.
+      # No es normativo: un valor nuevo se reporta como anomalia, no se rechaza.
+      observed_values:
+        - "Acciones"
+        - "Bonos"
+        - "CDT"
+        - "Cuenta de Ahorro"
+        - "Divisas"
+        - "ETF"
+        - "Fondo de Inversión"
+        - "Fondo de Pensión"
+      unknown_value_policy: flag   # flag | quarantine
+    rules:
+      - id: NULL_PRODUCT
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "product nulo"
+      - id: UNKNOWN_PRODUCT
+        check: in_domain
+        severity: WARNING
+        action: flag
+        message: "product no pertenece al catalogo observado"
+    example_valid: "Bonos"
+    example_invalid: null
+
+  - name: type
+    description: "Sentido del movimiento: entrada o salida. Llega con 10 variantes textuales."
+    physical_type: VARCHAR
+    logical_type: enum
+    required: true
+    nullable: false
+    role: key
+    normalization:
+      - trim
+      - lower
+      - map_synonyms          # ver type_synonyms
+    domain:
+      canonical_values: ["IN", "OUT"]
+      # Sinonimos OBSERVADOS en los archivos. Mapeo verificado, no inventado.
+      type_synonyms:
+        IN:  ["entrada", "in"]
+        OUT: ["salida", "out"]
+      unknown_value_policy: quarantine   # un sentido desconocido invalida el movimiento
+    rules:
+      - id: NULL_TYPE
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "type nulo"
+      - id: UNKNOWN_TYPE
+        check: in_domain
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "type no mapeable a IN/OUT con el catalogo de sinonimos configurado"
+    example_valid: "entrada | ENTRADA | IN | in"
+    example_invalid: "transferencia"
+
+  - name: fund
+    description: "Fondo de inversion. Llega con variantes de mayusculas, espacios externos y dobles espacios internos."
+    physical_type: VARCHAR
+    logical_type: string
+    required: true
+    nullable: false
+    role: key
+    normalization:
+      - trim
+      - collapse_whitespace   # 'Mercado  Monetario' -> 'Mercado Monetario'
+      - canonicalize_case     # match case-insensitive contra el catalogo
+    domain:
+      observed_values:
+        - "Balanceado"
+        - "Conservador"
+        - "Crecimiento"
+        - "Internacional"
+        - "Mercado Monetario"
+        - "Renta Fija"
+        - "Renta Variable"
+      unknown_value_policy: flag
+    rules:
+      - id: NULL_FUND
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "fund nulo"
+      - id: UNKNOWN_FUND
+        check: in_domain
+        severity: WARNING
+        action: flag
+        message: "fund no pertenece al catalogo observado (posible fondo nuevo)"
+    example_valid: "Renta Fija | renta fija | RENTA FIJA | 'Renta Fija '"
+    example_invalid: null
+
+  - name: amount
+    description: "Monto del movimiento. Llega como DOUBLE en el parquet; se persiste como DECIMAL exacto."
+    physical_type: DOUBLE
+    logical_type: decimal
+    precision: 20
+    scale: 2
+    required: true
+    nullable: false           # ver NULL_AMOUNT: politica configurable
+    role: mutable             # puede cambiar entre cortes -> dispara UPDATED
+    normalization:
+      - cast_decimal          # DOUBLE -> DECIMAL(20,2), politica de redondeo en pipeline.yml
+    rules:
+      - id: NULL_AMOUNT
+        check: not_null
+        severity: RECORD_ERROR
+        action: quarantine    # configurable: pipeline.yml -> quality.null_amount_policy
+        message: "amount nulo: el movimiento no es reconciliable financieramente"
+      - id: NON_FINITE_AMOUNT
+        check: finite
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "amount NaN o infinito"
+      - id: INVALID_AMOUNT_FORMAT
+        check: parseable_decimal
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "amount textual no se puede convertir con punto como separador decimal"
+      - id: AMOUNT_OUT_OF_RANGE
+        check: precision_fits
+        severity: RECORD_ERROR
+        action: quarantine
+        message: "amount excede DECIMAL(20,2)"
+      - id: AMOUNT_PRECISION_LOSS
+        check: scale_fits
+        severity: WARNING
+        action: flag
+        message: "amount tiene mas decimales que la escala configurada; se redondea con banker's rounding (half-even)"
+      - id: NEGATIVE_AMOUNT
+        check: non_negative
+        severity: INFO        # NO se rechaza: el enunciado no define el signo
+        action: flag
+        message: "amount negativo. Observado exclusivamente en type=IN (ver docs/insights)"
+      - id: ZERO_AMOUNT
+        check: non_zero
+        severity: INFO
+        action: flag
+        message: "amount igual a cero"
+    example_valid: "1490831.17"
+    example_invalid: "NaN"
+
+  - name: description
+    description: "Informacion libre del movimiento. Opcional."
+    physical_type: VARCHAR
+    logical_type: string
+    required: true            # la columna debe existir
+    nullable: true            # el valor puede ser nulo
+    role: mutable
+    normalization:
+      - trim                  # NO se altera el significado ni se imputa
+    rules:
+      - id: NULL_DESCRIPTION
+        check: not_null
+        severity: INFO
+        action: flag
+        message: "description nula (permitido)"
+    example_valid: "Retiro parcial"
+    example_invalid: null
+
+  - name: commercial_name
+    description: "Nombre comercial asociado. Opcional."
+    physical_type: VARCHAR
+    logical_type: string
+    required: true
+    nullable: true
+    role: mutable
+    normalization:
+      - trim
+      - collapse_whitespace
+    rules:
+      - id: NULL_COMMERCIAL_NAME
+        check: not_null
+        severity: INFO
+        action: flag
+        message: "commercial_name nulo (permitido)"
+    example_valid: "Bancolombia"
+    example_invalid: null
+
+# -----------------------------------------------------------------------------
+# Identidad del movimiento
+# -----------------------------------------------------------------------------
+# Los archivos no traen clave primaria de transaccion. Se construye una clave de
+# negocio determinista sobre los atributos que NO cambian cuando un movimiento se
+# corrige, mas un ordinal de ocurrencia que desempata movimientos legitimamente
+# repetidos con la misma combinacion de atributos.
+#
+# Evidencia que sustenta esta particion key/mutable (ver docs/analysis_and_assumptions.md):
+# alineando T contra T+1, unos 3.900 pares comparten exactamente estos 5
+# atributos normalizados y difieren solo en amount, description y/o
+# commercial_name. Esos son los "registros corregidos" del enunciado.
+# Sobre las filas ya validadas, el pipeline clasifica 3.724 UPDATED
+# (amount 2.290, description 1.478, commercial_name 44): esa es la cifra
+# reproducible, verificable en pipeline_runs.rows_updated.
+identity:
+  business_key: [id_cliente, date, product, type, fund]
+  mutable_attributes: [amount, description, commercial_name]
+  # Ordinal determinista para desempatar filas con la misma business_key dentro
+  # de un mismo corte. Ver docs/decisions.md ADR-002 para el riesgo asumido.
+  occurrence_ordinal:
+    enabled: true
+    order_by: [amount, description, commercial_name]
+    nulls_last: true
+    flag_column: is_key_ambiguous
+  hash_version: "v1"
+  # Serializacion estable usada tanto para movement_key como para row_hash.
+  serialization:
+    field_separator: "\x1F"     # US (U+001F): no aparece en los datos observados
+    null_token: "\x1ENULL"   # RS (U+001E) + NULL: no aparece en los datos observados
+    date_format: "%Y-%m-%d"
+    decimal_format: "fixed_2"     # 1490831.17 -> "1490831.17"; -0.00 se normaliza a "0.00"
+
+# -----------------------------------------------------------------------------
+# Codigos de error emitidos a rejected_records
+# -----------------------------------------------------------------------------
+error_codes:
+  # Criticos: detienen el pipeline (exit code != 0)
+  FILE_NOT_FOUND:          {severity: CRITICAL, scope: file,   description: "El archivo de entrada no existe"}
+  FILE_UNREADABLE:         {severity: CRITICAL, scope: file,   description: "El archivo no se puede leer o no es parquet valido"}
+  FILE_EMPTY:              {severity: CRITICAL, scope: file,   description: "El archivo no tiene filas"}
+  MISSING_REQUIRED_COLUMN: {severity: CRITICAL, scope: schema, description: "Falta una columna obligatoria del contrato"}
+  SCHEMA_MISMATCH:         {severity: CRITICAL, scope: schema, description: "Tipo fisico incompatible con el contrato"}
+  UNRESOLVED_SNAPSHOT_DATE: {severity: CRITICAL, scope: file,   description: "No se puede determinar la fecha del corte"}
+  GUARD_BREACH:            {severity: CRITICAL, scope: run,    description: "Se supero un umbral de seguridad (eliminaciones, caida de volumen o variacion monetaria)"}
+  REJECTION_RATE_EXCEEDED: {severity: CRITICAL, scope: run,    description: "El porcentaje de registros rechazados supera el umbral"}
+  # De registro: van a cuarentena, el pipeline continua
+  NULL_ID:                 {severity: RECORD_ERROR, scope: record}
+  EMPTY_ID:                {severity: RECORD_ERROR, scope: record}
+  NULL_DATE:               {severity: RECORD_ERROR, scope: record}
+  INVALID_DATE:            {severity: RECORD_ERROR, scope: record}
+  NULL_PRODUCT:            {severity: RECORD_ERROR, scope: record}
+  NULL_TYPE:               {severity: RECORD_ERROR, scope: record}
+  UNKNOWN_TYPE:            {severity: RECORD_ERROR, scope: record}
+  NULL_FUND:               {severity: RECORD_ERROR, scope: record}
+  NULL_AMOUNT:             {severity: RECORD_ERROR, scope: record}
+  NON_FINITE_AMOUNT:       {severity: RECORD_ERROR, scope: record}
+  INVALID_AMOUNT_FORMAT:   {severity: RECORD_ERROR, scope: record}
+  AMOUNT_OUT_OF_RANGE:     {severity: RECORD_ERROR, scope: record}
+  CONFLICTING_DUPLICATE:   {severity: RECORD_ERROR, scope: record, description: "Misma business_key con datos distintos y sin criterio de version confiable"}
+  # Informativos / avisos: no rechazan, se registran como flags de calidad
+  EXACT_DUPLICATE:         {severity: WARNING, scope: record, description: "Fila identica colapsada; se conserva una sola"}
+  INVALID_ID_FORMAT:       {severity: WARNING, scope: record}
+  UNKNOWN_PRODUCT:         {severity: WARNING, scope: record}
+  UNKNOWN_FUND:            {severity: WARNING, scope: record}
+  DATE_OUT_OF_RANGE:       {severity: WARNING, scope: record}
+  AMOUNT_PRECISION_LOSS:   {severity: WARNING, scope: record}
+  KEY_AMBIGUOUS:           {severity: WARNING, scope: record, description: "business_key repetida en el corte; desempatada por ordinal"}
+  NEGATIVE_AMOUNT:         {severity: INFO, scope: record}
+  ZERO_AMOUNT:             {severity: INFO, scope: record}
+  NULL_DESCRIPTION:        {severity: INFO, scope: record}
+  NULL_COMMERCIAL_NAME:    {severity: INFO, scope: record}

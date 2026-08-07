@@ -1,0 +1,185 @@
+# =============================================================================
+# CONFIGURACION OPERATIVA DEL PIPELINE
+# =============================================================================
+# Todas las rutas son RELATIVAS a la raiz del proyecto (project_root). No hay
+# rutas absolutas ni referencias a directorios fuera de este repositorio.
+# Solo los valores operativos consumidos admiten `TYBA_...`; las entradas
+# declarativas documentan comportamiento fijo y no son interruptores.
+# =============================================================================
+
+project:
+  name: tyba-movimientos-pipeline
+  timezone: UTC
+
+# Solo tres zonas existen en disco. Las capas Silver (staging, cuarentena) y
+# Gold (estado vigente, historico) son TABLAS dentro de movements.duckdb, no
+# directorios: ver docs/decisions.md ADR-003.
+paths:
+  raw_dir:       data/raw
+  reports_dir:   data/reports
+  database_file: data/database/movements.duckdb
+  contract_file: config/data_contract.yml
+
+# -----------------------------------------------------------------------------
+# Motor DuckDB
+# -----------------------------------------------------------------------------
+database:
+  # null = DuckDB decide (todas las CPU logicas y ~80% de la RAM).
+  # En un contenedor con limite de memoria conviene fijarlo por debajo del limite
+  # del cgroup: DuckDB no lee el cgroup y podria pedir mas de lo permitido.
+  threads: null              # ej: 4
+  memory_limit: null         # ej: "2GB"
+  # Directorio de desbordamiento a disco. Con el fijado, una agregacion o un join
+  # que no cabe en memoria se resuelve en disco en vez de fallar por falta de RAM:
+  # es lo que permite procesar cortes mucho mayores que la memoria disponible.
+  # Deliberadamente FUERA de data/: es E/S temporal de alta frecuencia y un
+  # volumen montado (sobre todo en Docker Desktop) la penaliza mucho, ademas de
+  # ensuciar la carpeta del usuario. docker-compose.yml lo fija a /tmp/duckdb.
+  temp_directory: null
+  # El pipeline no depende del orden de insercion en ningun punto; desactivarlo
+  # reduce memoria y permite mas paralelismo.
+  preserve_insertion_order: false
+
+logging:
+  level: INFO            # DEBUG | INFO | WARNING | ERROR
+  format: text           # text | json
+  # El log se escribe siempre en <reports_dir>/pipeline.log, de modo que mover
+  # los reportes con TYBA_PATHS__REPORTS_DIR mueve tambien el log.
+
+# -----------------------------------------------------------------------------
+# Ingesta
+# -----------------------------------------------------------------------------
+ingestion:
+  file_glob: "*.parquet"
+  # Como se determina la fecha del corte, en orden de prioridad:
+  #   1. --snapshot-date en la CLI (fuente mas confiable)
+  #   2. patron de fecha ISO en el nombre del archivo (movimientos_2026-08-05.parquet)
+  #   3. secuencia declarada en snapshot_sequence (para los nombres T / T1 entregados,
+  #      que NO contienen fecha)
+  #   4. max(date) del propio contenido del archivo  (fallback; se registra un WARNING)
+  snapshot_date_resolution: [cli, filename_iso, declared_sequence, max_content_date]
+  filename_date_regex: '(\d{4}-\d{2}-\d{2})'
+  # Mapeo explicito para los dos archivos entregados por Tyba, cuyos nombres no
+  # llevan fecha. La fecha se ancla a max(date) observado en cada archivo:
+  #   movimientos_dia_T  -> max(date) = 2024-10-15
+  #   movimientos_dia_T1 -> max(date) = 2024-10-16
+  declared_sequence:
+    movimientos_dia_T.parquet:  {snapshot_date: "2024-10-15", order: 1}
+    movimientos_dia_T1.parquet: {snapshot_date: "2024-10-16", order: 2}
+  # Politica cuando llega un archivo con el MISMO nombre pero contenido distinto
+  #   reprocess : se procesa como un corte nuevo (hash distinto -> run nuevo)
+  #   reject    : se rechaza y se detiene
+  same_name_new_hash_policy: reprocess
+  # Politica cuando el hash ya fue procesado con exito
+  #   skip  : se omite y se registra (idempotencia)
+  #   force : se reprocesa (solo con --force)
+  known_hash_policy: skip
+  allow_out_of_order: false   # un corte anterior al ultimo procesado se rechaza
+
+# -----------------------------------------------------------------------------
+# Tipado y normalizacion
+# -----------------------------------------------------------------------------
+normalization:
+  # Formatos de fecha aceptados, en orden de intento. Ambos OBSERVADOS en los
+  # archivos entregados: 46.518 filas ISO y 3.482 filas DD/MM/YYYY en el corte T.
+  accepted_date_formats:
+    - {regex: '^\d{4}-\d{2}-\d{2}$',  strptime: "%Y-%m-%d", label: ISO}
+    - {regex: '^\d{2}/\d{2}/\d{4}$',  strptime: "%d/%m/%Y", label: DMY_SLASH}
+  amount:
+    precision: 20
+    scale: 2
+    # Redondeo bancario (half-even) y marcado con AMOUNT_PRECISION_LOSS de
+    # montos con mas de 2 decimales: comportamiento fijo del CAST en
+    # sql/staging.sql, no una opcion. Ver ADR-006 en docs/decisions.md.
+  text:
+    trim: true
+    collapse_internal_whitespace: true
+    # Declarativo, no interruptor: staging conserva todos los *_raw; Gold solo
+    # date/type/amount_original. Los demas originales se recuperan del Parquet.
+    preserve_original: true
+
+# -----------------------------------------------------------------------------
+# Calidad de datos
+# -----------------------------------------------------------------------------
+quality:
+  null_amount_policy: quarantine    # quarantine | keep_with_warning
+  # Si el % de filas rechazadas supera este umbral, el corte se considera no
+  # confiable y la ejecucion falla (CRITICAL / REJECTION_RATE_EXCEEDED).
+  max_rejection_rate:
+    warn: 0.02     # 2%
+    fail: 0.15     # 15%   (observado en T y T+1: ~3,1% por amount nulo)
+  # Duplicados exactos: se colapsan a una sola fila y se contabilizan
+  # (exact_duplicate_count). Misma business_key con datos distintos: se
+  # desempata con un ordinal determinista y se marca is_key_ambiguous. Ambos
+  # son comportamiento fijo de sql/staging.sql, no opciones.
+
+# -----------------------------------------------------------------------------
+# Guardas de seguridad contra falsos eliminados / cortes parciales
+# -----------------------------------------------------------------------------
+# Ninguno de estos umbrales es una regla de negocio: son controles operativos
+# configurables. Los valores por defecto se calibraron de forma conservadora
+# contra el comportamiento OBSERVADO entre T y T+1 (ver docs/decisions.md ADR-005).
+guards:
+  enabled: true
+  on_breach: fail          # fail | skip_deletes | warn_only
+  # Volumen minimo para que los umbrales PORCENTUALES tengan sentido. Con 3 filas
+  # vigentes, una baja es el 33% y el porcentaje no informa de nada. Por debajo de
+  # este numero solo se aplican los controles absolutos (min_valid_rows).
+  min_rows_for_ratio_guards: 100
+  # % de claves vigentes que desaparecen respecto al total vigente previo.
+  # Observado T -> T+1: ~22,6%. Por eso warn=0.10 se dispara (deseado: demuestra
+  # que la alerta funciona sobre datos reales) y fail=0.30 no.
+  max_deleted_pct:      {warn: 0.10, fail: 0.30}
+  # Caida de volumen del corte entrante respecto al corte anterior.
+  # Observado T -> T+1: 2,0%.
+  max_volume_drop_pct:  {warn: 0.10, fail: 0.30}
+  # Variacion del monto total vigente entre cortes.
+  max_amount_variation_pct: {warn: 0.20, fail: 0.50}
+  # Numero minimo de filas validas para considerar el corte completo.
+  min_valid_rows: 1
+
+# -----------------------------------------------------------------------------
+# Deteccion de cambios
+# -----------------------------------------------------------------------------
+change_detection:
+  # Comparacion contra el ESTADO VIGENTE acumulado (movements_current), no
+  # contra el archivo anterior (asi T+2, T+3... funcionan sin cambios de
+  # codigo), y dos nulos se consideran iguales: comportamiento fijo del
+  # FULL OUTER JOIN en sql/change_detection.sql, no opciones.
+  # Si una clave previamente eliminada reaparece en un corte posterior.
+  allow_reactivation: true
+  reactivation_change_type: REACTIVATED
+
+# -----------------------------------------------------------------------------
+# Persistencia
+# -----------------------------------------------------------------------------
+persistence:
+  # Baja logica (nunca se borra fisicamente), historico SCD2 y escritura
+  # transaccional: arquitectura fija del pipeline, no opciones. Ver ADR-001,
+  # ADR-003 y ADR-004 en docs/decisions.md.
+  #
+  # Retencion del historico. movements_history crece de forma monotona: en la
+  # prueba de escala con dos cortes sinteticos (10M + 9,8M), la base completa
+  # alcanzo 14,38 GB. No se extrapola linealmente a 30 dias porque el crecimiento
+  # depende de la tasa diaria de altas, correcciones y bajas.
+  #
+  # null = sin limite (comportamiento por defecto: no se borra nada).
+  # Con un entero N, al cierre de cada corte se eliminan las versiones YA
+  # CERRADAS (is_current = false) con valid_to anterior a N dias.
+  # La version vigente de cada clave NUNCA se borra, aunque sea antigua: el
+  # estado actual siempre es reconstruible.
+  history_retention_days: null
+
+# -----------------------------------------------------------------------------
+# Analitica y deteccion de anomalias
+# -----------------------------------------------------------------------------
+analytics:
+  enabled: true
+  outlier_method: iqr       # iqr | zscore | none
+  iqr_multiplier: 3.0       # 3.0 = outlier severo (Tukey); 1.5 = outlier suave
+  anomaly:
+    new_category_alert: true
+    daily_volume_zscore_threshold: 3.0
+
+reporting:
+  enabled: true

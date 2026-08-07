@@ -1,0 +1,52 @@
+# Salidas del pipeline (se regeneran con docker compose up --build)
+data/database/
+data/reports/*.log
+*.duckdb
+*.duckdb.wal
+*.db-journal
+
+# data/raw/ y data/reports/*.csv|.md SI se versionan: insumo y entregable
+
+# Renders HTML de la documentacion (Quarto/pandoc)
+*_files/
+VALIDATION_GUIDE.html
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# El PDF original y la auditoria interna no se redistribuyen. La carpeta
+# estudio/ si se versiona: contiene el material de defensa solicitado.
+THA.pdf
+evaluation/
+
+# Secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*
+secrets*
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+.Rhistory

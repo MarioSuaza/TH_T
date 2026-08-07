@@ -1,0 +1,21 @@
+# Dependencias con version fijada: la imagen es reproducible byte a byte.
+# ---------------------------------------------------------------------------
+# Motor analitico y de persistencia. Un unico archivo, ACID, DECIMAL exacto y
+# lectura directa de parquet con pushdown.
+duckdb==1.5.5
+
+# Lectura de metadatos y esquema del parquet sin materializar los datos.
+pyarrow==21.0.0
+
+# Solo para dar formato a los reportes y al tablero. El calculo pesado NO pasa
+# por pandas: se resuelve en SQL dentro de DuckDB.
+pandas==2.2.3
+
+# Contrato de datos y configuracion.
+PyYAML==6.0.2
+
+# Tablero de inspeccion.
+streamlit==1.41.1
+
+# Pruebas.
+pytest==8.3.4

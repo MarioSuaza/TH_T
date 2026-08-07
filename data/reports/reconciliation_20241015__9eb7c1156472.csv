@@ -1,0 +1,13 @@
+check_group,check_name,left_label,left_value,right_label,right_value,difference,passed
+BITACORA,eventos registrados = cambios reales detectados,movement_changes,48457.0,cambios_reales,48457.0,0.0,True
+BITACORA,toda correccion tiene al menos una columna modificada registrada,correcciones_sin_detalle,0.0,cero,0.0,0.0,True
+CAMBIOS,new+updated+deleted+unchanged+reactivated+ya_dados_de_baja = claves del FULL OUTER JOIN,suma_por_tipo,48457.0,claves_join,48457.0,0.0,True
+CAMBIOS,new+updated+unchanged+reactivated = claves distintas del corte,clasificadas_del_corte,48457.0,staging_distintas,48457.0,0.0,True
+ESTADO,como maximo una fila vigente por movement_key,claves_duplicadas,0.0,cero,0.0,0.0,True
+ESTADO,todas las claves del corte estan en el estado vigente y activas,sin_reflejo,0.0,cero,0.0,0.0,True
+ESTADO,vigentes_despues = vigentes_antes + nuevos + reactivados - eliminados,esperado,48457.0,observado,48457.0,0.0,True
+HISTORICO,como maximo una version marcada como vigente por movement_key,versiones_vigentes_duplicadas,0.0,cero,0.0,0.0,True
+HISTORICO,versiones consecutivas sin huecos,claves_con_hueco,0.0,cero,0.0,0.0,True
+INGESTA,filas_leidas = validas + rechazadas,rows_read,50000.0,valid+rejected,50000.0,0.0,True
+MONETARIA,monto_vigente_despues = monto_vigente_antes + suma(impacto de los cambios),esperado,1133406868796.56,observado,1133406868796.56,0.0,True
+MONETARIA,suma de montos del corte = suma de montos de sus claves en el estado vigente,staging,1133406868796.56,vigente,1133406868796.56,0.0,True

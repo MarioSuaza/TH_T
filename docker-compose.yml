@@ -1,0 +1,119 @@
+# =============================================================================
+# `docker compose up --build` ejecuta el pipeline de extremo a extremo y termina.
+#
+#   docker compose up --build                      -> pipeline (perfil por defecto)
+#   docker compose --profile dashboard up --build   -> pipeline + tablero en :8501
+#   docker compose run --rm tests                   -> suite de pruebas
+#   docker compose run --rm profile                 -> perfilado de los parquet
+#   docker compose run --rm shell                   -> consola DuckDB sobre la base
+#   docker compose run --rm benchmark                        -> prueba de escala (datos sinteticos)
+#   docker compose run --rm benchmark --rows 500000 2000000  -> con tamanos propios
+#
+# No hace falta ninguna configuracion adicional: los parquet ya estan en
+# ./data/raw y todas las rutas son relativas al repositorio.
+# =============================================================================
+
+x-common: &common
+  build:
+    context: .
+    dockerfile: Dockerfile
+  image: tyba-movimientos:1.0.0
+  # ./data se monta como volumen para que la base, los reportes y los insights
+  # queden en el disco del evaluador cuando el contenedor termina.
+  volumes:
+    - ./data:/app/data
+  environment:
+    # Todas las opciones de config/pipeline.yml pueden sobreescribirse con
+    # variables TYBA_<seccion>__<clave>. Ejemplos comentados:
+    # TYBA_GUARDS__MAX_DELETED_PCT__FAIL: "0.40"
+    # TYBA_QUALITY__NULL_AMOUNT_POLICY: "keep_with_warning"
+    # TYBA_LOGGING__FORMAT: "json"
+    TYBA_PROJECT_ROOT: /app
+    PYTHONPATH: /app
+    # Desbordamiento a disco dentro del contenedor, no en el volumen montado.
+    # Sin esto, una agregacion que no cabe en memoria falla en vez de ir a disco.
+    TYBA_DATABASE__TEMP_DIRECTORY: /tmp/duckdb
+    # DuckDB NO lee el limite del cgroup: sin esto intenta usar el ~80% de la RAM
+    # del host y el OOM killer lo mata sin dar tiempo a registrar el error.
+    # Medido con cortes de 10M: 8GB y 4 hilos completaron en 418.67s; Docker
+    # Desktop debe tener ~12GB totales para absorber memoria ajena a DuckDB.
+    TYBA_DATABASE__MEMORY_LIMIT: "${TYBA_MEMORY_LIMIT:-2GB}"
+    # Cada hilo reserva sus propios buffers, asi que MAS hilos con poca memoria
+    # empeora: en la prueba de 10M, 16 hilos agotaban lo que 4 completaban.
+    TYBA_DATABASE__THREADS: "${TYBA_THREADS:-4}"
+  # Sin red: el pipeline solo lee archivos locales. Reduce la superficie de ataque
+  # y demuestra que no hay dependencias externas ocultas en tiempo de ejecucion.
+  network_mode: none
+
+services:
+
+  # --------------------------------------------------------------- pipeline
+  # Perfil por defecto. Procesa todos los cortes pendientes de data/raw en orden,
+  # genera reportes e insights y termina con codigo 0.
+  pipeline:
+    <<: *common
+    command: ["src.pipeline", "--input-directory", "/app/data/raw"]
+    restart: "no"
+
+  # --------------------------------------------------------------- tablero
+  # Arranca solo cuando el pipeline ha terminado correctamente.
+  dashboard:
+    <<: *common
+    profiles: ["dashboard"]
+    depends_on:
+      pipeline:
+        condition: service_completed_successfully
+    # El tablero si necesita red para publicar el puerto.
+    network_mode: "bridge"
+    ports:
+      - "8501:8501"
+    entrypoint: ["streamlit", "run", "dashboard/app.py"]
+    command:
+      - "--server.address=0.0.0.0"
+      - "--server.port=8501"
+      - "--server.headless=true"
+      - "--browser.gatherUsageStats=false"
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # --------------------------------------------------------------- pruebas
+  tests:
+    <<: *common
+    profiles: ["tools"]
+    entrypoint: ["python", "-m", "pytest"]
+    command: ["-v"]
+
+  # ------------------------------------------------------- perfilado de datos
+  profile:
+    <<: *common
+    profiles: ["tools"]
+    entrypoint: ["python"]
+    command: ["scripts/profile_data.py"]
+
+  # ------------------------------------------------- prueba de escala (sintetica)
+  # Genera datos sinteticos y mide tiempo, memoria y tamano en disco. NO usa los
+  # archivos de Tyba: los resultados van a benchmark_synthetic.csv/.md, separado
+  # de los reportes reales. Ejemplos:
+  #   docker compose run --rm benchmark
+  #   docker compose run --rm benchmark --rows 500000 2000000
+  #   TYBA_MEMORY_LIMIT=8GB TYBA_THREADS=4 docker compose run --rm benchmark --rows 10000000
+  benchmark:
+    <<: *common
+    profiles: ["tools"]
+    entrypoint: ["python", "scripts/benchmark.py"]
+    command: ["--rows", "50000", "250000", "1000000"]
+
+  # ------------------------------------------------- consola SQL interactiva
+  shell:
+    <<: *common
+    profiles: ["tools"]
+    entrypoint: ["python"]
+    command: ["-i", "-c",
+              "import duckdb; con = duckdb.connect('/app/data/database/movements.duckdb', read_only=True); print('Conectado en solo lectura. Ejemplo: con.sql(\"SELECT * FROM v_summary_by_fund\")')"]
+    stdin_open: true
+    tty: true

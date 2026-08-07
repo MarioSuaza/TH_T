@@ -1,0 +1,4 @@
+anomaly_code,category,severity,entity_type,entity_id,metric_name,observed,expected,threshold,description
+NEGATIVE_AMOUNT_CONCENTRATION,BUSINESS_RULE,WARNING,type,IN,negative_share,0.03756457003950167,,,"El 3.76% de los movimientos IN tiene monto negativo (989 de 26328). El enunciado no define el signo: se reporta, no se corrige."
+HIGH_DELETION_SHARE,CHANGE,WARNING,snapshot,2024-10-16,deleted_share,0.21994758239263676,0.0,0.1,"El corte dio de baja 10658 movimientos, el 22.0% de los 48457 vigentes antes del corte"
+DAILY_VOLUME_OUTLIER,REVIEW,INFO,movement_date,2024-10-16,movements,304.0,1486.25,3.0,El dia 2024-10-16 tiene 304 movimientos frente a una media de 1486.3 (z=-5.25)
